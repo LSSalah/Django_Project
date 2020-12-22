@@ -6,6 +6,12 @@ from .models import *
 def about(request):
     return render(request, 'about.html')
 
+def drivers(request):
+    return render(request, 'drivers.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 def registration(request):
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
@@ -28,6 +34,9 @@ def registration(request):
             errors["success"] = "Successfully registered (or logged in)!"
             return redirect('/')
 
+def register(request):
+    return render(request, 'index.html')
+
 def login(request):
     try:
         this_user = User.objects.get(email=request.POST['email'])
@@ -48,3 +57,4 @@ def logout(request):
     del request.session['user_id']
     messages.error(request, "You have successfully logged out")
     return redirect('/')
+

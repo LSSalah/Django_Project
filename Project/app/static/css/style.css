@@ -1,3 +1,15 @@
+.navbar {
+  height: 70px;
+
+}
+.navbar-brand img {
+  margin-top: -12px;
+}
+
+.navbar-inverse .navbar-collapse{
+  margin-top: 10px;
+}
+
 #login-dp {
   min-width: 250px;
   padding: 14px 14px 0;
