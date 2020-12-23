@@ -1,5 +1,6 @@
 from django.db import models
 import re
+import datetime
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class UserManager(models.Manager):
@@ -15,6 +16,12 @@ class UserManager(models.Manager):
             errors['password'] = "Password must be at least 8 characters!"
         if postData['passwordconfirmation'] != postData['password']:
             errors['passwordconfirmation'] = "Confirmation password does not match password!"
+        if len(post_data['birthday']) < 1:
+            errors['birthday'] = "Date of Birth is required!"
+        else:
+            dob = datetime.strptime(post_data["birthday"], "%Y-%m-%d")
+            if dob > datetime.now():
+                errors['birthday'] = "Date of Birth must be in the past"
         return errors
 
 class User(models.Model):
@@ -22,8 +29,9 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    phone = models.IntegerField()
-    address = models.CharField(max_length=255)
+    phone = models.IntegerField(null = True)
+    address = models.CharField(max_length=255 , null = True)
+    birthday = models.DateField(null = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
@@ -37,9 +45,10 @@ class Driver(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    phone = models.IntegerField()
-    address = models.CharField(max_length=255)
-    car = models.CharField(max_length=255)
+    phone = models.IntegerField(null = True)
+    address = models.CharField(max_length=255 , null = True)
+    car = models.CharField(max_length=255 , null = True)
+    birthday = models.DateField(null = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
