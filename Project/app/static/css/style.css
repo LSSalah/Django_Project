@@ -3,11 +3,12 @@
 
 }
 .navbar-brand img {
-  margin-top: -12px;
+  margin-top: -14%;
 }
 
+
 .navbar-inverse .navbar-collapse{
-  margin-top: 10px;
+  margin-top: 1%;
 }
 
 #login-dp {

@@ -30,3 +30,19 @@ class User(models.Model):
     
     def __repr__(self):
         return f"Name: {self.first_name} {self.last_name} | email : {self.email} "
+
+
+class Driver(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    phone = models.IntegerField()
+    address = models.CharField(max_length=255)
+    car = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    objects = UserManager()
+    
+    def __repr__(self):
+        return f"Name: {self.first_name} {self.last_name} | email : {self.email} "

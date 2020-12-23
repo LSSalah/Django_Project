@@ -40,10 +40,20 @@ def register(request):
 def login(request):
     try:
         this_user = User.objects.get(email=request.POST['email'])
+        driver = Driver.objects.get(email=request.POST['email'])
         if this_user:
             print(this_user.password)
             if bcrypt.checkpw(request.POST['password'].encode(), this_user.password.encode()):
                 request.session['user_id'] = this_user.id
+                messages.error(request, "Successfully registered (or logged in)!")
+                return redirect('/')
+            else:
+                messages.error(request, "Wrong password")
+                return redirect('/')
+        
+        else:
+            if bcrypt.checkpw(request.POST['password'].encode(), driver.password.encode()):
+                request.session['user_id'] = driver.id
                 messages.error(request, "Successfully registered (or logged in)!")
                 return redirect('/')
             else:
