@@ -7,38 +7,40 @@ def about(request):
     try:
         if request.session:
             current_user = User.objects.get(id = request.session['user_id'])
+            current_driver = Driver.objects.get(id = request.session['driver_id'])
             context = {
-            "user": current_user
+            "user": current_user,
+            "driver" : current_driver
                 
                 }
-            return render(request, 'about.html',context )
-        else:
-            current_user = Driver.objects.get(id = request.session['user_id'])
-            context = {
-            "user": current_user
-            }
             return render(request, 'about.html',context )
     except:
         return render(request, 'about.html')
 
 def drivers(request):
     try:
-        current_user = User.objects.get(id = request.session['user_id'])
-        context = {
-        "user": current_user
-            
-            }
+        if request.session:
+            current_user = User.objects.get(id = request.session['user_id'])
+            current_driver = Driver.objects.get(id = request.session['driver_id'])
+            context = {
+            "user": current_user,
+            "driver" : current_driver
+                
+                }
         return render(request, 'drivers.html',context )
     except:
         return render(request, 'drivers.html')
 
 def contact(request):
     try:
-        current_user = User.objects.get(id = request.session['user_id'])
-        context = {
-        "user": current_user
-            
-            }
+        if request.session:
+            current_user = User.objects.get(id = request.session['user_id'])
+            current_driver = Driver.objects.get(id = request.session['driver_id'])
+            context = {
+            "user": current_user,
+            "driver" : current_driver
+                
+                }
         return render(request, 'contact.html',context )
     except:
         return render(request, 'contact.html' )
@@ -90,17 +92,20 @@ def registerdriver(request):
             car = request.POST["car"]
             password = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
             this_user = Driver.objects.create(first_name = first_name,last_name = last_name, email = email, password = password, phone = phone , address = address , birthday = birthday , car = car)
-            request.session['user_id'] = this_user.id
+            request.session['driver_id'] = this_user.id
             errors["success"] = "Successfully registered (or logged in)!"
             return redirect('/driverorder')
 
 def register(request):
     try:
-        current_user = User.objects.get(id = request.session['user_id'])
-        context = {
-        "user": current_user
-            
-            }
+        if request.session:
+            current_user = User.objects.get(id = request.session['user_id'])
+            current_driver = Driver.objects.get(id = request.session['driver_id'])
+            context = {
+            "user": current_user,
+            "driver" : current_driver
+                
+                }
         return render(request, 'about.html',context )
     except:
         return render(request, 'register.html')
@@ -124,7 +129,7 @@ def login(request):
             driver = Driver.objects.get(email=request.POST['email'])
             print ('+' * 30 )
             if bcrypt.checkpw(request.POST['password'].encode(), driver.password.encode()):
-                request.session['user_id'] = driver.id
+                request.session['driver_id'] = driver.id
                 messages.error(request, "Successfully registered (or logged in)!")
                 return redirect('/driverorder')
             else:
@@ -142,10 +147,12 @@ def logout(request):
 def userorder(request):
     try:
         current_user = User.objects.get(id = request.session['user_id'])
+        current_driver = Driver.objects.get(id = request.session['driver_id'])
         myorders = Order.objects.filter(poster=current_user)
         context = {
         "user": current_user ,
-        "myorders" : myorders
+        "myorders" : myorders,
+        "driver" : current_driver
             }
         return render(request, 'userorder.html',context )
     except:
@@ -168,6 +175,11 @@ def edit_account(request, user_id):
     if request.session['user_id']:
         context = {
         "user": User.objects.get(id=request.session['user_id']),
+        }
+        return render(request, 'account.html', context)
+    if request.session['driver_id']:
+        context = {
+        "user": Driver.objects.get(id=request.session['driver_id']),
         }
         return render(request, 'account.html', context)
     else:
@@ -204,7 +216,7 @@ def removeorder(request, order_id):
     return redirect('/userorder')
 
 def addorder(request, order_id):
-    fav = Driver.objects.get(id = request.session['user_id'])
+    fav = Driver.objects.get(id = request.session['driver_id'])
     Order.objects.get(id = order_id).deliver.add(fav)
     return redirect('/driverorder')
 

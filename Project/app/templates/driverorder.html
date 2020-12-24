@@ -41,12 +41,19 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/drivers">Drivers</a></li>
                         <li><a href="/contact">Contact</a></li>
+                        {% if request.session.user_id %}
                         <li><a href="/driverorder">View Orders</a></li>
+                        <li><a href="/userorder">Order</a></li>
+                        {%endif%}
+                        <li><a href="/register">Register</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.session.user_id %}
                         <li>
-                            <p class="navbar-text">Welcome {{user.first_name}}</p>
+                            <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
                         </li>
                         <li>
                             <a href="/logout"><b>Logout</b></a>
@@ -90,6 +97,10 @@
                                                         <input type="checkbox"> keep me logged-in
                                                     </label>
                                                 </div>
+                                                <input type="radio" id="user" name="option" value="user">
+                                                <label for="user">User</label><br>
+                                                <input type="radio" id="user" name="option" value="driver">
+                                                <label for="driver">Driver</label><br>
                                             </form>
                                         </div>
                                         <div class="bottom text-center">
@@ -106,34 +117,31 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div class="col-1"></div>
-            <div class="col-5">     
-                <h2 style="padding: 30px 0 30px 0"> Order</h2>
-                <br>
-                {% for order in order_list %}
-                {{ order.content }}
-                <p> Ordered by: <a href = "/users/{{user.id}}"> {{order.poster.first_name}} {{order.poster.last_name}} </a> </p>
-                <button style = "color:black" align="right" type="submit" class="btn btn-outline-primary btn-primary btn-lg">
-                <a href="/order/{{order.id}}"> Accept </a>
+        <div style = "padding: 0px 0 0px 50px">     
+            <h2 style="padding: 30px 0 30px 0"> Order</h2>
+            {% for order in order_list %}
+            {{ order.content }}
+            <p> Ordered by: <a href = "/users/{{user.id}}"> {{order.poster.first_name}} {{order.poster.last_name}} </a> </p>
+            <button  align="right" type="submit" class="btn btn-outline-primary btn-primary btn-lg">
+            <a href="/order/{{order.id}}" style = "color:black"> Accept </a>
+            </button><br><br>
+            {% endfor %}
+            <br><br>
+            <br><br>
+        </div>
+        <div class="col-1"></div>
+        <div style = "padding: 0px 0 30px 50px">     
+            <h2 style="padding: 30px 0 30px 0"> My Taken Orders</h2>
+            {% for order in favourites %}
+            {{ order.content }} 
+            <p> Ordered by: <a href = "/users/{{user.id}}"> {{order.poster.first_name}} {{order.poster.last_name}} </a> </p>
+            <p>{{order.poster.address}}</p>
+            <button  align="right" type="submit" class="btn btn-outline-primary btn-primary btn-lg">
+                <a href="#" style = "color:black"> Done </a>
                 </button><br><br>
-                {% endfor %}
-                <br><br>
-                <br><br>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-5">     
-                <h2 style="padding: 30px 0 30px 0"> My Taken Orders</h2>
-                {% for order in favourites %}
-                {{ order.content }} 
-                <p> Ordered by: <a href = "/users/{{user.id}}"> {{order.poster.first_name}} {{order.poster.last_name}} </a> </p>
-                <button style = "color:black" align="right" type="submit" class="btn btn-outline-danger btn-primary btn-lg">
-                <br><br>
-                {% endfor %}
-            </div> 
-
-        <button type="submit" class="btn btn-primary btn-block" style="width: 100px; margin-left:30px;">Take Order</button>
-
-
-        <footer class="mt-auto text-white-50" style="margin-left:50px;">
+            {% endfor %}
+        </div> 
+        <footer class="mt-auto text-white-50" style="text-align: center;">
             <p>Django Project <a href="https://academy.axsos.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
         </footer>
     </body>

@@ -167,21 +167,24 @@
                     <li><a href="/drivers">Drivers</a></li>
                     <li><a href="/contact">Contact</a></li>
                     {% if request.session.user_id %}
+                    <li><a href="/driverorder">View Orders</a></li>
                     <li><a href="/userorder">Order</a></li>
-                    {%else%}
-                    <li><a href="/register">Register</a></li>
                     {%endif%}
+                    <li><a href="/register">Register</a></li>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if request.session.user_id %}
-                        <li>
-                            <p class="navbar-text">Welcome {{user.first_name}}</p>
-                        </li>
-                        <li>
-                            <a href="/logout"><b>Logout</b></a>
-                        </li>
-                    </ul>
-                        {%else%}
+                    <li>
+                        <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
+                    </li>
+                    <li>
+                        <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                    </li>
+                    <li>
+                        <a href="/logout"><b>Logout</b></a>
+                    </li>
+                    {%else%}
                     <li>
                         <p class="navbar-text">Already have an account?</p>
                     </li>
@@ -219,6 +222,10 @@
                                                     <input type="checkbox"> keep me logged-in
                                                 </label>
                                             </div>
+                                            <input type="radio" id="user" name="option" value="user">
+                                            <label for="user">User</label><br>
+                                            <input type="radio" id="user" name="option" value="driver">
+                                            <label for="driver">Driver</label><br>
                                         </form>
                                     </div>
                                     <div class="bottom text-center">

@@ -40,16 +40,30 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/drivers">Drivers</a></li>
                         <li><a href="/contact">Contact</a></li>
-                        {% if request.session.user_id %}
+                        {% if request.session.driver_id %}
+                        <li><a href="/driverorder">View Orders</a></li>
+                        {% elif request.session.user_id %}
                         <li><a href="/userorder">Order</a></li>
-                        {%else%}
-                        <li><a href="/register">Register</a></li>
                         {%endif%}
+                        <li><a href="/register">Register</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.session.user_id %}
                         <li>
                             <p class="navbar-text">Welcome {{user.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                        </li>
+                        <li>
+                            <a href="/logout"><b>Logout</b></a>
+                        </li>
+                        {% elif request.session.driver_id %}
+                        <li>
+                            <p class="navbar-text">Welcome {{driver.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{driver.id}}"><b>Edit My Account</b></a>
                         </li>
                         <li>
                             <a href="/logout"><b>Logout</b></a>
@@ -170,7 +184,7 @@
             }
         </script>
         <footer class="mt-auto text-white-50">
-            <p>Django Project <a href="https://axsosacademy.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
+            <p>Django Project <a href="https://academy.axsos.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
         </footer>
     </body>
 </html>

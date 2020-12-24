@@ -33,63 +33,63 @@
         float: left;
         width: 33.3%;
         margin-bottom: 16px;
-        padding: 0 8px;
+        padding: 0 60px;
     }
 
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        margin: 8px;
-    }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 8px;
+        }
 
-    .about-section {
-        padding: 50px;
-        text-align: center;
-        background-color: #474e5d;
-        color: white;
-        margin-top: 77px;
-    }
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #474e5d;
+            color: white;
+            margin-top: 20px;
+        }
 
-    .container {
-        padding: 0 16px;
-    }
+        .container {
+            padding: 0 16px;
+        }
 
-    .container::after, .row::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
+        .container::after, .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
 
-    .title {
-        color: grey;
-    }
+        .title {
+            color: grey;
+        }
 
-    .button {
-        border: none;
-        outline: 0;
-        display: inline-block;
-        padding: 8px;
-        color: white;
-        background-color: #000;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-    }
+        .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
 
-    .button:hover {
-        background-color: #555;
-    }
+        .button:hover {
+            background-color: #555;
+        }
 
-    @media screen and (max-width: 650px) {
-    .column {
-        width: 100%;
-        display: block;
+        @media screen and (max-width: 650px) {
+        .column {
+            width: 100%;
+            display: block;
+        }
+        }
+        @media (min-width: 1200px){
+        .container {
+            width: 410px;
     }
-    }
-    @media (min-width: 1200px){
-    .container {
-        width: 457px;
-}
-    }
+        }
         </style>
     </head>
 
@@ -113,16 +113,30 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/drivers">Drivers</a></li>
                         <li><a href="/contact">Contact</a></li>
-                        {% if request.session.user_id %}
+                        {% if request.session.driver_id %}
                         <li><a href="/driverorder">View Orders</a></li>
-                        {%else%}
-                        <li><a href="/register">Register</a></li>
+                        {% elif request.session.user_id %}
+                        <li><a href="/userorder">Order</a></li>
                         {%endif%}
+                        <li><a href="/register">Register</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.session.user_id %}
                         <li>
                             <p class="navbar-text">Welcome {{user.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                        </li>
+                        <li>
+                            <a href="/logout"><b>Logout</b></a>
+                        </li>
+                        {% elif request.session.driver_id %}
+                        <li>
+                            <p class="navbar-text">Welcome {{driver.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{driver.id}}"><b>Edit My Account</b></a>
                         </li>
                         <li>
                             <a href="/logout"><b>Logout</b></a>
@@ -166,6 +180,10 @@
                                                         <input type="checkbox"> keep me logged-in
                                                     </label>
                                                 </div>
+                                                <input type="radio" id="user" name="option" value="user">
+                                                <label for="user">User</label><br>
+                                                <input type="radio" id="user" name="option" value="driver">
+                                                <label for="driver">Driver</label><br>
                                             </form>
                                         </div>
                                         <div class="bottom text-center">
@@ -184,7 +202,7 @@
         <div class="about-section">
             <h1>Drivers</h1>
             <p>Some text about who we are and what we do.</p>
-            <p>Resize the browser window to see that this page is responsive by the way.</p>
+            <p>Our Motto : If you are are the best , you get the best!</p>
         </div>
         
         <h2 style="text-align:center">Our Team</h2>
@@ -193,10 +211,10 @@
             <div class="card">
                 <img src="static/images/team1.jpg" alt="Jane" style="width:100%">
                 <div class="container">
-                <h2>Jane Doe</h2>
-                <p class="title">CEO & Founder</p>
+                <h2>Ekram Arar</h2>
+                <p class="title">CEO</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>jane@example.com</p>
+                <p>ekram@example.com</p>
                 </div>
             </div>
             </div>
@@ -205,10 +223,10 @@
             <div class="card">
                 <img src="static/images/team2.jpg" alt="Mike" style="width:100%">
                 <div class="container">
-                <h2>Mike Ross</h2>
-                <p class="title">Art Director</p>
+                <h2>Salah</h2>
+                <p class="title">Director</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>mike@example.com</p>
+                <p>salah@example.com</p>
                 </div>
             </div>
             </div>
@@ -217,16 +235,16 @@
             <div class="card">
                 <img src="static/images/team3.jpg" alt="John" style="width:100%">
                 <div class="container">
-                <h2>John Doe</h2>
+                <h2>Mahmoud Waked</h2>
                 <p class="title">Designer</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>john@example.com</p>
+                <p>mahmoud@example.com</p>
                 </div>
             </div>
             </div>
         </div>
         <footer class="mt-auto text-white-50">
-            <p>Django Project <a href="https://axsosacademy.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
+            <p>Django Project <a href="https://academy.axsos.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
         </footer>
     </body>
 </html>

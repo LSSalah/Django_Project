@@ -47,12 +47,19 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/drivers">Drivers</a></li>
                         <li><a href="/contact">Contact</a></li>
+                        {% if request.session.user_id %}
+                        <li><a href="/driverorder">View Orders</a></li>
                         <li><a href="/userorder">Order</a></li>
+                        {%endif%}
+                        <li><a href="/register">Register</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.session.user_id %}
                         <li>
-                            <p class="navbar-text">Welcome {{user.first_name}}</p>
+                            <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
                         </li>
                         <li>
                             <a href="/logout"><b>Logout</b></a>
@@ -96,6 +103,10 @@
                                                         <input type="checkbox"> keep me logged-in
                                                     </label>
                                                 </div>
+                                                <input type="radio" id="user" name="option" value="user">
+                                                <label for="user">User</label><br>
+                                                <input type="radio" id="user" name="option" value="driver">
+                                                <label for="driver">Driver</label><br>
                                             </form>
                                         </div>
                                         <div class="bottom text-center">
@@ -129,12 +140,12 @@
             </form>
         </div> -->
         <div class="col-1"></div>
-        <div class="col-5">     
+        <div style = "padding: 30px 0 30px 50px">
             <h2 style="padding: 30px 0 30px 0"> My Orders:</h2>
-            {% for order in myorders %}
-            {{ order.content }} 
-            <button style = "color:black" align="right" type="submit" class="btn btn-outline-danger btn-primary btn-lg">
-            <a href="/remove/{{order.id}}"> Delete Order </a> </button>
+            <p>{% for order in myorders %}
+            {{ order.content }}</p>
+            <button  align="right" type="submit" class="btn btn-outline-danger btn-primary btn-lg">
+            <a href="/remove/{{order.id}}" style = "color:black"> Delete Order </a> </button>
             <br><br>
             {% endfor %}
         </div> 
