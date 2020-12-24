@@ -55,9 +55,8 @@ def registration(request):
             phone = request.POST["phone"]
             address = request.POST["address"]
             password = request.POST["password"]
-
             password = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
-            this_user = User.objects.create(first_name = first_name,last_name = last_name, email = email, password = password)
+            this_user = User.objects.create(first_name = first_name,last_name = last_name, email = email, password = password, phone = phone , address = address , birthday = birthday)
             request.session['user_id'] = this_user.id
             errors["success"] = "Successfully registered (or logged in)!"
             return redirect('/')

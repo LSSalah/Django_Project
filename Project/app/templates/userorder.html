@@ -44,29 +44,64 @@
                         <li><a href="/userorder">Order</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-
+                        {% if request.session.user_id %}
+                        <li>
+                            <p class="navbar-text">Welcome {{user.first_name}}</p>
+                        </li>
+                        <li>
+                            <a href="/logout"><b>Logout</b></a>
+                        </li>
+                    </ul>
+                        {%else%}
+                        <li>
+                            <p class="navbar-text">Already have an account?</p>
+                        </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{user.first_name}}</b> <span
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
                                     class="caret"></span></a>
                             <ul id="login-dp" class="dropdown-menu">
                                 <li>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <a href="/editacc/{{user.id}}" style="width: 100px; margin-left:30px;  " > Edit My Account</a>
-                                            </div>
-                                            <hr>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block" style="width: 100px; margin-left:30px;">Log out</button>
-                                            </div>
-                                            
+                                            <p style="color: red;">{% if messages %}
+                                                {% for message in messages %}
+                                                    {{ message.message }}
+                                                {%endfor %}
+                                                {% endif %}</p>
+                                            <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                                                {% csrf_token %} 
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmail2"
+                                                        placeholder="Email address" name="email" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                    <input type="password" class="form-control" id="exampleInputPassword2"
+                                                        placeholder="Password" name="password" required>
+                                                    <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> keep me logged-in
+                                                    </label>
+                                                </div>
+                                            </form>
                                         </div>
-                                    
+                                        <div class="bottom text-center">
+                                            New here ? <a href="/register"><b>Join Us</b></a>
+                                        </div>
+                            
                                     </div>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+                    {%endif%}
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
