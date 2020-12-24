@@ -46,6 +46,7 @@
         text-align: center;
         background-color: #474e5d;
         color: white;
+        margin-top: 77px;
     }
 
     .container {
@@ -112,7 +113,11 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/drivers">Drivers</a></li>
                         <li><a href="/contact">Contact</a></li>
+                        {% if request.session.user_id %}
+                        <li><a href="/driverorder">View Orders</a></li>
+                        {%else%}
                         <li><a href="/register">Register</a></li>
+                        {%endif%}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.session.user_id %}
@@ -134,6 +139,11 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <p style="color: red;">{% if messages %}
+                                                {% for message in messages %}
+                                                    {{ message.message }}
+                                                {%endfor %}
+                                                {% endif %}</p>
                                             <form class="form" role="form" method="post" action="/login"accept-charset="UTF-8" id="login-nav">
                                                 {% csrf_token %} 
                                                 <div class="form-group">

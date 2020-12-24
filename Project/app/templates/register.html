@@ -166,6 +166,9 @@
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/drivers">Drivers</a></li>
                     <li><a href="/contact">Contact</a></li>
+                    {% if request.session.user_id %}
+                    <li><a href="/userorder">Order</a></li>
+                    {%else%}
                     <li><a href="/register">Register</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -188,7 +191,13 @@
                             <li>
                                 <div class="row">
                                     <div class="col-md-12">
+                                        <p style="color: red;">{% if messages %}
+                                            {% for message in messages %}
+                                                {{ message.message }}
+                                            {%endfor %}
+                                            {% endif %}</p>
                                         <form class="form" role="form" method="post" action="/login"accept-charset="UTF-8" id="login-nav">
+                                            {% csrf_token %} 
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
                                                 <input type="email" class="form-control" id="exampleInputEmail2"
@@ -230,31 +239,36 @@
                 {%endfor %}
             {% endif %}</p>
             <div class="left">
-            <h1>Sign up as a User</h1>
-            
-            <input type="text" name="first_name" placeholder="First Name" />
-            <input type="text" name="Last_name" placeholder="Last Name" />
-            <input type="number" name="phone" placeholder="Phone Number" />
-            <input type="text" name="email" placeholder="E-mail" />
-            <input type="date" name="birthday" placeholder="Birthday" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="passwordconfirmation" placeholder="Retype password" />
-            <input type="text" name="address" placeholder="Address" />
-            <input type="submit" name="signup_submit" value="Sign me up" />
+                <h1>Sign up as a User</h1>
+                <form action="/userorder" method="POST">
+                    {% csrf_token %} 
+                    <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="Last_name" placeholder="Last Name" />
+                    <input type="number" name="phone" placeholder="Phone Number" />
+                    <input type="text" name="email" placeholder="E-mail" />
+                    <input type="date" name="birthday" placeholder="Birthday" />
+                    <input type="password" name="password" placeholder="Password" />
+                    <input type="password" name="passwordconfirmation" placeholder="Retype password" />
+                    <input type="text" name="address" placeholder="Address" />
+                    <input type="submit" name="signup_submit" value="Sign me up" />
+                </form>
             </div>
             
             <div class="right">
                 <h1>Sign up as a Driver</h1>
-                <input type="text" name="first_name" placeholder="First Name" />
-                <input type="text" name="Last_name" placeholder="Last Name" />
-                <input type="number" name="phone" placeholder="Phone Number" />
-                <input type="text" name="car" placeholder="Car" />
-                <input type="date" name="birthday" placeholder="Birthday" />
-                <input type="text" name="email" placeholder="E-mail" />
-                <input type="password" name="password" placeholder="Password" />
-                <input type="password" name="passwordconfirmation" placeholder="Retype password" />
-                <input type="text" name="address" placeholder="Address" />
-                <input type="submit" name="signup_submit" value="Sign me up" />
+                <form action="/driverorder" method="POST">
+                    {% csrf_token %} 
+                    <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="Last_name" placeholder="Last Name" />
+                    <input type="number" name="phone" placeholder="Phone Number" />
+                    <input type="text" name="car" placeholder="Car" />
+                    <input type="date" name="birthday" placeholder="Birthday" />
+                    <input type="text" name="email" placeholder="E-mail" />
+                    <input type="password" name="password" placeholder="Password" />
+                    <input type="password" name="passwordconfirmation" placeholder="Retype password" />
+                    <input type="text" name="address" placeholder="Address" />
+                    <input type="submit" name="signup_submit" value="Sign me up" />
+                </form>
             </div>
             <div class="or">OR</div>
         </div>
