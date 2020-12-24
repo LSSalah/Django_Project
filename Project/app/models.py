@@ -16,12 +16,12 @@ class UserManager(models.Manager):
             errors['password'] = "Password must be at least 8 characters!"
         if postData['passwordconfirmation'] != postData['password']:
             errors['passwordconfirmation'] = "Confirmation password does not match password!"
-        if len(post_data['birthday']) < 1:
-            errors['birthday'] = "Date of Birth is required!"
-        else:
-            dob = datetime.strptime(post_data["birthday"], "%Y-%m-%d")
-            if dob > datetime.now():
-                errors['birthday'] = "Date of Birth must be in the past"
+        # if len(post_data['birthday']) < 1:
+        #     errors['birthday'] = "Date of Birth is required!"
+        # else:
+        #     dob = datetime.strptime(post_data["birthday"], "%Y-%m-%d")
+        #     if dob > datetime.now():
+        #         errors['birthday'] = "Date of Birth must be in the past"
         return errors
 
 class User(models.Model):
@@ -32,6 +32,7 @@ class User(models.Model):
     phone = models.IntegerField(null = True)
     address = models.CharField(max_length=255 , null = True)
     birthday = models.DateField(null = True)
+    # role = models.ForeignKey(userRole, related_name = 'roles', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
@@ -55,3 +56,13 @@ class Driver(models.Model):
     
     def __repr__(self):
         return f"Name: {self.first_name} {self.last_name} | email : {self.email} "
+
+class Order(models.Model):
+    content = models.CharField(max_length = 255)
+    poster = models.ForeignKey(User, related_name = 'orders', on_delete = models.CASCADE)
+    deliver = models.ManyToManyField(Driver, related_name = "delivered")
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+# class userRole(models.Model):
+#     role = models.CharField(max_length=255)

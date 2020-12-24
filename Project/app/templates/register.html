@@ -241,10 +241,10 @@
             {% endif %}</p>
             <div class="left">
                 <h1>Sign up as a User</h1>
-                <form action="/userorder" method="POST">
+                <form action="/registration" method="POST">
                     {% csrf_token %} 
                     <input type="text" name="first_name" placeholder="First Name" />
-                    <input type="text" name="Last_name" placeholder="Last Name" />
+                    <input type="text" name="last_name" placeholder="Last Name" />
                     <input type="number" name="phone" placeholder="Phone Number" />
                     <input type="text" name="email" placeholder="E-mail" />
                     <input type="date" name="birthday" placeholder="Birthday" />
@@ -257,10 +257,10 @@
             
             <div class="right">
                 <h1>Sign up as a Driver</h1>
-                <form action="/driverorder" method="POST">
+                <form action="/registerdriver" method="POST">
                     {% csrf_token %} 
                     <input type="text" name="first_name" placeholder="First Name" />
-                    <input type="text" name="Last_name" placeholder="Last Name" />
+                    <input type="text" name="last_name" placeholder="Last Name" />
                     <input type="number" name="phone" placeholder="Phone Number" />
                     <input type="text" name="car" placeholder="Car" />
                     <input type="date" name="birthday" placeholder="Birthday" />

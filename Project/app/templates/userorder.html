@@ -17,10 +17,16 @@
         {% load static %}
         <script src="{% static 'js/script.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+        <style>
+            .form-control {
+                display: block;
+                width: 20%;
+                padding: 40px 12px;
+            }
+        </style>
     </head>
 
-    <body >
+    <body>
         <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -105,7 +111,7 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <div>
+        <!-- <div>
             <form action="/user" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -121,9 +127,40 @@
                 <br><br>
                 <button type="submit" class="btn btn-primary btn-block" style="width: 100px; margin-left:10px;">Send</button>
             </form>
+        </div> -->
+        <div class="col-1"></div>
+        <div class="col-5">     
+            <h2 style="padding: 30px 0 30px 0"> My Orders:</h2>
+            {% for order in myorders %}
+            {{ order.content }} 
+            <button style = "color:black" align="right" type="submit" class="btn btn-outline-danger btn-primary btn-lg">
+            <a href="/remove/{{order.id}}"> Delete Order </a> </button>
+            <br><br>
+            {% endfor %}
+        </div> 
+        <h2 style="padding: 10px 0 20px 60px"> Add Order!</h2>
+        <div style = "padding: 30px 0 30px 50px">
+            <form action = '/order' method = "POST">
+                {% csrf_token %}
+                <div class = "form-group">
+                    <label for = "order"> Order </label>
+                    <textarea name = 'order' rows = '3' cols = '50' class="form-control" id="posted" placeholder = 'Your order here..'> </textarea><br>
+                </div>
+                <button style = "color:black" align="right" type="submit" class="btn btn-outline-primary btn-primary btn-lg"> Submit </button>
+            </form>
         </div>
-        <div>
-
+        <!-- <div class="quotable">
+            <p id="title"><strong>My Orders!</strong></p>
+            <div>
+                {% for quote in quote_list %}
+                <div class="one_quote">
+                    <p>{{quote.content}}</p>
+                    <p>posted by:<a href="/users/{{quote.poster.id}}">{{quote.poster.first_name}}</a></p> -->
+                    <!-- <a href="/delete_quote/{{quote.id}}">Delete</a> -->
+                <!-- </div>
+                {% endfor %}
+            </div>
+        </div> --> 
         <footer class="mt-auto text-white-50" style="margin-left:50px;">
             <p>Django Project <a href="https://academy.axsos.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
         </footer>
