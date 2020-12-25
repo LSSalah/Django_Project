@@ -9,6 +9,7 @@
         <!-- Font Awesome CSS -->
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
         <!-- jQuery -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <!-- Bootstrap JS -->
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
@@ -116,8 +117,46 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <footer class="mt-auto text-white-50">
-            <p>Django Project <a href="https://academy.axsos.ps/" class="text-white">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
-        </footer>
+        <div class="container">
+            <div style="text-align:center">
+                <h2>Contact Us</h2>
+                <p>Swing by for a cup of coffee, or leave us a message:</p>
+            </div>
+            <div class="row">
+                <div class="column">
+                <img src="static/images/first_slide1.png" style="width:100%">
+                <h2 class="w3-wide">CONTACT</h2>
+                Ramallah, Palestine<br>
+                Phone: +00 151515<br>
+                Email: mail@mail.com<br>
+                <p class="w3-opacity w3-center"><i>Drop a note!</i></p>
+                </div>
+                <div class="column">
+                <form action="/contact">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="fname" name="first_name" placeholder="Your name..">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="lname" name="last_name" placeholder="Your last name..">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Your email..">
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+                    <input type="submit" value="Submit">
+                </form>
+                </div>
+            </div>
+            </div>
+            <footer class="w3-center w3-padding-40 w3-opacity w3-hover-opacity-off ">
+                <a href="/contact" class="w3-button w3-black"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+                <div class="w3-xlarge w3-section">
+                    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                    <i class="fa fa-instagram w3-hover-opacity"></i>
+                    <i class="fa fa-snapchat w3-hover-opacity"></i>
+                    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                    <i class="fa fa-twitter w3-hover-opacity"></i>
+                    <i class="fa fa-linkedin w3-hover-opacity"></i>
+                </div>
+                <p style="margin-top: 25px;">Django Project <a href="https://academy.axsos.ps/">Axsos Academy</a>, by <a href="">@Coders</a>.</p>
+            </footer>
     </body>
 </html>
