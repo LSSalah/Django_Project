@@ -16,7 +16,7 @@
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
         <link rel="shortcut icon" href="static/images/Capture.png">
         {% load static %}
-        <script src="{% static 'js/script.js' %}"></script>
+        <!-- <script src="{% static 'js/script.js' %}"></script> -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <style>
             .form-control {
@@ -43,85 +43,86 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/drivers">Drivers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        {% if request.session.user_id %}
-                        <li><a href="/driverorder">View Orders</a></li>
-                        <li><a href="/userorder">Order</a></li>
-                        {%endif%}
-                        <li><a href="/register">Register</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if request.session.user_id %}
-                        <li>
-                            <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
-                        </li>
-                        <li>
-                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
-                        </li>
-                        <li>
-                            <a href="/logout"><b>Logout</b></a>
-                        </li>
-                    </ul>
-                        {%else%}
-                        <li>
-                            <p class="navbar-text">Already have an account?</p>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
-                                    class="caret"></span></a>
-                            <ul id="login-dp" class="dropdown-menu">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p style="color: red;">{% if messages %}
-                                                {% for message in messages %}
-                                                    {{ message.message }}
-                                                {%endfor %}
-                                                {% endif %}</p>
-                                            <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
-                                                {% csrf_token %} 
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail2"
-                                                        placeholder="Email address" name="email" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword2"
-                                                        placeholder="Password" name="password" required>
-                                                    <div class="help-block text-right"><a href="">Forget the password ?</a>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"> keep me logged-in
-                                                    </label>
-                                                </div>
-                                                <input type="radio" id="user" name="option" value="user">
-                                                <label for="user">User</label><br>
-                                                <input type="radio" id="user" name="option" value="driver">
-                                                <label for="driver">Driver</label><br>
-                                            </form>
-                                        </div>
-                                        <div class="bottom text-center">
-                                            New here ? <a href="/register"><b>Join Us</b></a>
-                                        </div>
-                            
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/drivers">Team</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    {% if request.session.user_id %}
+                    <li><a href="/userorder">Order</a></li>
+                    {% elif request.session.driver_id %}
+                    <li><a href="/driverorder">View Orders</a></li>
+                    {%else%}
+                    <li><a href="/register">Register</a></li>
                     {%endif%}
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.session.user_id %}
+                    <li>
+                        <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
+                    </li>
+                    <li>
+                        <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                    </li>
+                    <li>
+                        <a href="/logout"><b>Logout</b></a>
+                    </li>
+                </ul>
+                    {%else%}
+                    <li>
+                        <p class="navbar-text">Already have an account?</p>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                                class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="color: red;">{% if messages %}
+                                            {% for message in messages %}
+                                                {{ message.message }}
+                                            {%endfor %}
+                                            {% endif %}</p>
+                                        <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                                            {% csrf_token %} 
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail2"
+                                                    placeholder="Email address" name="email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword2"
+                                                    placeholder="Password" name="password" required>
+                                                <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> keep me logged-in
+                                                </label>
+                                            </div>
+                                            <input type="radio" id="user" name="option" value="user">
+                                            <label for="user">User</label><br>
+                                            <input type="radio" id="user" name="option" value="driver">
+                                            <label for="driver">Driver</label><br>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here ? <a href="/register"><b>Join Us</b></a>
+                                    </div>
+                        
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {%endif%}
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
         </nav>
         <div class="w3-container w3-padding-64  w3-center" id="order">
             <div class="w3-content">

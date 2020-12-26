@@ -1,151 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
-        <!-- Font Awesome CSS -->
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
-        <!-- jQuery -->
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-        <!-- Bootstrap JS -->
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
-        
-        <link rel="shortcut icon" href="static/images/Capture.png">
-        {% load static %}
-        <script src="{% static 'js/script.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <style>
-            @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <!-- jQuery -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- Bootstrap JS -->
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+
+    <link rel="shortcut icon" href="static/images/Capture.png">
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
         *:focus {
-        outline: none;
+            outline: none;
         }
+        /* *{
+            outline: 1px solid red;
+        } */
 
         body {
-        margin: 0;
-        padding: 0;
-        background:#9d9d9d;
-        font-size: 16px;
-        color: #222;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
+            margin: 0;
+            padding: 0;
+            background: #9d9d9d;
+            font-size: 16px;
+            color: #222;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
         }
 
         #login-box {
-        position: relative;
-        margin: 5% auto;
-        width: 600px;
-        height: 585px;
-        background: #FFF;
-        border-radius: 2px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            position: relative;
+            margin:20px auto 15px auto;
+            width: 1200px;
+            height: 420px;
+            background: #FFF;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .left {
-        position: absolute;
-        top: 0;
-        left: 0;
-        box-sizing: border-box;
-        padding: 40px;
-        width: 300px;
-        height: 429px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            border-right: 1px solid #AAA;
+            padding: 40px;
+            width: 550px;
+            height: 420px;
         }
 
         h1 {
-        margin: 0 0 20px 0;
-        font-weight: 300;
-        font-size: 27px;
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-weight: 300;
+            font-size: 27px;
         }
 
         input[type="text"],
         input[type="password"] {
-        display: block;
-        box-sizing: border-box;
-        margin-bottom: 20px;
-        padding: 4px;
-        width: 220px;
-        height: 32px;
-        border: none;
-        border-bottom: 1px solid #AAA;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        transition: 0.2s ease;
+            display: block;
+            box-sizing: border-box;
+            margin-right: 5px;
+            margin-bottom: 20px;
+            padding: 4px;
+            width: 220px;
+            height: 32px;
+            border: none;
+            border-bottom: 1px solid #AAA;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            transition: 0.2s ease;
         }
 
         input[type="text"]:focus,
         input[type="password"]:focus {
-        border-bottom: 2px solid #16a085;
-        color: #16a085;
-        transition: 0.2s ease;
+            border-bottom: 2px solid #16a085;
+            color: #16a085;
+            transition: 0.2s ease;
         }
-
+        input[type="date"] {
+            margin-left: 20px;
+            text-align: right;
+        }
         input[type="submit"] {
-        margin-top: 28px;
-        width: 120px;
-        height: 32px;
-        background: #0053ec;
-        border: none;
-        border-radius: 2px;
-        color: #FFF;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 500;
-        text-transform: uppercase;
-        transition: 0.1s ease;
-        cursor: pointer;
-        }
-
-        input[type="submit"]:hover,
-        input[type="submit"]:focus {
-        opacity: 0.8;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        transition: 0.1s ease;
-        }
-
-        input[type="submit"]:active {
-        opacity: 1;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-        transition: 0.1s ease;
+            margin-top: 15px;
+            width: 120px;
+            height: 42px;
+            background: #0053ec;
+            border: none;
+            border-radius: 2px;
+            color: #FFF;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.1s ease;
+            cursor: pointer;
         }
 
         .or {
-        position: absolute;
-        top: 180px;
-        left: 280px;
-        width: 40px;
-        height: 40px;
-        background: #DDD;
-        border-radius: 50%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        line-height: 40px;
-        text-align: center;
+            position: absolute;
+            top: 180px;
+            left: 580px;
+            width: 40px;
+            height: 40px;
+            background: #DDD;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            line-height: 40px;
+            text-align: center;
         }
 
         .right {
-        position: absolute;
-        top: 0;
-        right: 0;
-        box-sizing: border-box;
-        padding: 40px;
-        width: 300px;
-        height: 507px;
-        background: url('https://goo.gl/YbktSj');
-        background-size: cover;
-        background-position: center;
-        border-radius: 0 2px 2px 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            box-sizing: border-box;
+            border-left: 1px solid #AAA;
+            padding: 40px;
+            width: 550px;
+            height: 420px;
         }
-
-        .right .loginwith {
-        display: block;
-        margin-bottom: 40px;
-        font-size: 28px;
-        color: #FFF;
-        text-align: center;
+        .messages {
+            display: inline-block; 
+            height: 90px; 
+            width: 150; 
+            color:#843030; 
+            outline: 1px dashed red; 
+            background-color: #DDD;
         }
-        </style>
-    </head>
+        .messages li {
+            margin-top: 1px;
+            margin-right: 20px;
+        }
+        ::placeholder{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -159,126 +162,164 @@
                 </button>
                 <a class="navbar-brand" href="#"><img src='static/images/Capture.png' class="img-fluid" alt="logo"></a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/drivers">Drivers</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    {% if request.session.user_id %}
-                    <li><a href="/driverorder">View Orders</a></li>
-                    <li><a href="/userorder">Order</a></li>
-                    {%endif%}
-                    <li><a href="/register">Register</a></li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if request.session.user_id %}
-                    <li>
-                        <p class="navbar-text">Welcome {{user.first_name}}{{driver.first_name}}</p>
-                    </li>
-                    <li>
-                        <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
-                    </li>
-                    <li>
-                        <a href="/logout"><b>Logout</b></a>
-                    </li>
-                    {%else%}
-                    <li>
-                        <p class="navbar-text">Already have an account?</p>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
-                                class="caret"></span></a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p style="color: red;">{% if messages %}
-                                            {% for message in messages %}
-                                                {{ message.message }}
-                                            {%endfor %}
-                                            {% endif %}</p>
-                                        <form class="form" role="form" method="post" action="/login"accept-charset="UTF-8" id="login-nav">
-                                            {% csrf_token %} 
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail2"
-                                                    placeholder="Email address" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2"
-                                                    placeholder="Password" required>
-                                                <div class="help-block text-right"><a href="">Forget the password ?</a>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> keep me logged-in
-                                                </label>
-                                            </div>
-                                            <input type="radio" id="user" name="option" value="user">
-                                            <label for="user">User</label><br>
-                                            <input type="radio" id="user" name="option" value="driver">
-                                            <label for="driver">Driver</label><br>
-                                        </form>
-                                    </div>
-                                    <div class="bottom text-center">
-                                        New here ? <a href="/register"><b>Join Us</b></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/drivers">Team</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if request.session.user_id %}
+                <li><a href="/userorder">Order</a></li>
+                {% elif request.session.driver_id %}
+                <li><a href="/driverorder">View Orders</a></li>
+                {%else%}
+                <li><a href="/register">Register</a></li>
                 {%endif%}
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.user_id %}
+                <li>
+                    <p class="navbar-text">Welcome {{user.first_name}}</p>
+                </li>
+                <li>
+                    <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                </li>
+                <li>
+                    <a href="/logout"><b>Logout</b></a>
+                </li>
+                {% elif request.session.driver_id %}
+                <li>
+                    <p class="navbar-text">Welcome {{driver.first_name}}</p>
+                </li>
+                <li>
+                    <a href="/editaccdriver/{{driver.id}}"><b>Edit My Account</b></a>
+                </li>
+                <li>
+                    <a href="/logout"><b>Logout</b></a>
+                </li>
+            </ul>
+                {%else%}
+                <li>
+                    <p class="navbar-text">Already have an account?</p>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                            class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="color: red;">{% if messages %}
+                                        {% for message in messages %}
+                                        {{ message.message }}
+                                        {%endfor %}
+                                        {% endif %}</p>
+                                    <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8"
+                                        id="login-nav">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail2"
+                                                placeholder="Email address" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword2"
+                                                placeholder="Password" required>
+                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> keep me logged-in
+                                            </label>
+                                        </div>
+                                        <input type="radio" id="user" name="option" value="user">
+                                        <label for="user">User</label><br>
+                                        <input type="radio" id="user" name="option" value="driver">
+                                        <label for="driver">Driver</label><br>
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New here ? <a href="/register"><b>Join Us</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {%endif%}
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
     </nav>
-        <div id="login-box">
-            <p style="color: red;">{% if messages %}
-                {% for message in messages %}
-                    {{ message.message }}
-                {%endfor %}
-            {% endif %}</p>
-            <div class="left">
-                <h1>Sign up as a User</h1>
-                <form action="/registration" method="POST">
-                    {% csrf_token %} 
+    <div id="login-box">
+        <div class="left">
+            <h1>Sign up as a User</h1>
+            <form action="/registration" method="POST">
+                {% csrf_token %}
+                <div style="display: inline-block;">
                     <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="phone" placeholder="Phone Number" />
+                    
+                </div>
+                <div style="display: inline-block;">
                     <input type="text" name="last_name" placeholder="Last Name" />
-                    <input type="number" name="phone" placeholder="Phone Number" />
-                    <input type="text" name="email" placeholder="E-mail" />
-                    <input type="date" name="birthday" placeholder="Birthday" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <input type="password" name="passwordconfirmation" placeholder="Retype password" />
-                    <input type="text" name="address" placeholder="Address" />
-                    <input type="submit" name="signup_submit" value="Sign me up" />
-                </form>
-            </div>
-            
-            <div class="right">
-                <h1>Sign up as a Driver</h1>
-                <form action="/registerdriver" method="POST">
-                    {% csrf_token %} 
-                    <input type="text" name="first_name" placeholder="First Name" />
-                    <input type="text" name="last_name" placeholder="Last Name" />
-                    <input type="number" name="phone" placeholder="Phone Number" />
-                    <input type="text" name="car" placeholder="Car" />
-                    <input type="date" name="birthday" placeholder="Birthday" />
+                    <input style="height: 28.5px;" type="date" name="birthday" placeholder="Birthday" />
+                </div>
+                <div style="display: inline-block;">
                     <input type="text" name="email" placeholder="E-mail" />
                     <input type="password" name="password" placeholder="Password" />
-                    <input type="password" name="passwordconfirmation" placeholder="Retype password" />
+                </div>
+                <div style="display: inline-block;">
                     <input type="text" name="address" placeholder="Address" />
-                    <input type="submit" name="signup_submit" value="Sign me up" />
-                </form>
-            </div>
-            <div class="or">OR</div>
+                    <input type="password" name="passwordconfirmation" placeholder="Confirm Password" />
+                </div>
+                <center>
+                <input type="submit" name="signup_submit" value="Sign me up" />
+                </center>
+            </form>
         </div>
-    </body>
+
+        <div class="right">
+            <h1>Sign up as a Driver</h1>
+            <form action="/registerdriver" method="POST">
+                {% csrf_token %}
+                <div style="display: inline-block;">
+                    <input type="text" name="first_name" placeholder="First Name" />
+                    <input type="text" name="phone" placeholder="Phone Number" />
+                    
+                </div>
+                <div style="display: inline-block;">
+                    <input type="text" name="last_name" placeholder="Last Name" />
+                    <input style="height: 28.5px;" type="date" name="birthday" placeholder="Birthday" />
+                </div>
+                <div style="display: inline-block;">
+                    <input type="text" name="email" placeholder="E-mail" />
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
+                <div style="display: inline-block;">
+                    <input type="text" name="address" placeholder="Address" />
+                    <input type="password" name="passwordconfirmation" placeholder="Confirm Password" />
+                </div>
+                <center>
+                <input type="submit" name="signup_submit" value="Sign me up" />
+                </center>
+                <!-- <input type="text" name="car" placeholder="Car" /> -->
+            </form>
+        </div>
+        <div class="or">OR</div>
+    </div>
+    <center>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </center>
+</body>
+
 </html>

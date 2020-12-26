@@ -15,7 +15,7 @@
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
         <link rel="shortcut icon" href="static/images/Capture.png">
         {% load static %}
-        <script src="{% static 'js/script.js' %}"></script>
+        <!-- <script src="{% static 'js/script.js' %}"></script> -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <style>
         body {
@@ -109,128 +109,129 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/drivers">Drivers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        {% if request.session.driver_id %}
-                        <li><a href="/driverorder">View Orders</a></li>
-                        {% elif request.session.user_id %}
-                        <li><a href="/userorder">Order</a></li>
-                        {%endif%}
-                        <li><a href="/register">Register</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if request.session.user_id %}
-                        <li>
-                            <p class="navbar-text">Welcome {{user.first_name}}</p>
-                        </li>
-                        <li>
-                            <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
-                        </li>
-                        <li>
-                            <a href="/logout"><b>Logout</b></a>
-                        </li>
-                        {% elif request.session.driver_id %}
-                        <li>
-                            <p class="navbar-text">Welcome {{driver.first_name}}</p>
-                        </li>
-                        <li>
-                            <a href="/editacc/{{driver.id}}"><b>Edit My Account</b></a>
-                        </li>
-                        <li>
-                            <a href="/logout"><b>Logout</b></a>
-                        </li>
-                    </ul>
-                        {%else%}
-                        <li>
-                            <p class="navbar-text">Already have an account?</p>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
-                                    class="caret"></span></a>
-                            <ul id="login-dp" class="dropdown-menu">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p style="color: red;">{% if messages %}
-                                                {% for message in messages %}
-                                                    {{ message.message }}
-                                                {%endfor %}
-                                                {% endif %}</p>
-                                            <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
-                                                {% csrf_token %} 
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail2"
-                                                        placeholder="Email address" name="email" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword2"
-                                                        placeholder="Password" name="password" required>
-                                                    <div class="help-block text-right"><a href="">Forget the password ?</a>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"> keep me logged-in
-                                                    </label>
-                                                </div>
-                                                <input type="radio" id="user" name="option" value="user">
-                                                <label for="user">User</label><br>
-                                                <input type="radio" id="user" name="option" value="driver">
-                                                <label for="driver">Driver</label><br>
-                                            </form>
-                                        </div>
-                                        <div class="bottom text-center">
-                                            New here ? <a href="/register"><b>Join Us</b></a>
-                                        </div>
-                            
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/drivers">Team</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    {% if request.session.user_id %}
+                    <li><a href="/userorder">Order</a></li>
+                    {% elif request.session.driver_id %}
+                    <li><a href="/driverorder">View Orders</a></li>
+                    {%else%}
+                    <li><a href="/register">Register</a></li>
                     {%endif%}
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.session.user_id %}
+                    <li>
+                        <p class="navbar-text">Welcome {{user.first_name}}</p>
+                    </li>
+                    <li>
+                        <a href="/editacc/{{user.id}}"><b>Edit My Account</b></a>
+                    </li>
+                    <li>
+                        <a href="/logout"><b>Logout</b></a>
+                    </li>
+                    {% elif request.session.driver_id %}
+                    <li>
+                        <p class="navbar-text">Welcome {{driver.first_name}}</p>
+                    </li>
+                    <li>
+                        <a href="/editaccdriver/{{driver.id}}"><b>Edit My Account</b></a>
+                    </li>
+                    <li>
+                        <a href="/logout"><b>Logout</b></a>
+                    </li>
+                </ul>
+                    {%else%}
+                    <li>
+                        <p class="navbar-text">Already have an account?</p>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                                class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="color: red;">{% if messages %}
+                                            {% for message in messages %}
+                                                {{ message.message }}
+                                            {%endfor %}
+                                            {% endif %}</p>
+                                        <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                                            {% csrf_token %} 
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail2"
+                                                    placeholder="Email address" name="email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword2"
+                                                    placeholder="Password" name="password" required>
+                                                <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> keep me logged-in
+                                                </label>
+                                            </div>
+                                            <input type="radio" id="user" name="option" value="user">
+                                            <label for="user">User</label><br>
+                                            <input type="radio" id="user" name="option" value="driver">
+                                            <label for="driver">Driver</label><br>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here ? <a href="/register"><b>Join Us</b></a>
+                                    </div>
+                        
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {%endif%}
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
         </nav>
-        <div class="about-section">
-            <h1>Drivers</h1>
-            <p>Some text about who we are and what we do.</p>
-            <p>Our Motto : If you are are the best , you get the best!</p>
+        <div class="about-section" style="color: white;">
+            <h1 style="color: white;">Get Groceries</h1>
+            <p  style="color: white;">A meal for every family</p>
+            <p  style="color: white;">A job for everyone</p>
         </div>
         
         <h2 style="text-align:center">Our Team</h2>
         <div class="w3-row-padding ">
             <div class="w3-col l4 m6 w3-margin-bottom">
-                <img src="static/images/team1.jpg" alt="John" style="width:100%">
-                <h3>John Doe</h3>
-                <p class="w3-opacity">CEO &amp; Founder</p>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                <img src="static/images/team_1.jpg" alt="John" style="width:100%">
+                <h3>Mahmoud Waked</h3>
+                <p class="w3-opacity">@Coders</p>
+                <p>"Our website aims to help people put food on their table, whether they were our customers or employees."</p>
             </div>
             
             <div class="w3-col l4 m6 w3-margin-bottom">
-                <img src="static/images/team2.jpg" alt="Jane" style="width:100%">
-                <h3>Jane Doe</h3>
-                <p class="w3-opacity">Architect</p>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                <img src="static/images/team_2.jpg" alt="Jane" style="width:100%">
+                <h3>Ekram Arar</h3>
+                <p class="w3-opacity">@Coders</p>
+                <p>"We hope that this pandemic ends soon, but for now at least we hope that our website helps people go through it at a safer manner."</p>
+            </p>
             </div>
             
             <div class="w3-col l4 m6 w3-margin-bottom">
-                <img src="static/images/team3.jpg" alt="Mike" style="width:100%">
-                <h3>Mike Ross</h3>
-                <p class="w3-opacity">Architect</p>
-                <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                <img src="static/images/team_3.jpg" alt="Mike" style="width:100%">
+                <h3>Salah Abu Karsh</h3>
+                <p class="w3-opacity">@Coders</p>
+                <p>"We try to help people through the financial hardships of this year by offering them to join our team of drivers."</p>
             </div>
         </div>
         <footer class="w3-center w3-padding-40 w3-opacity w3-hover-opacity-off ">
-            <a href="/drivers" class="w3-button w3-black"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+            <!-- <a href="/drivers" class="w3-button w3-black"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a> -->
             <div class="w3-xlarge w3-section">
                 <i class="fa fa-facebook-official w3-hover-opacity"></i>
                 <i class="fa fa-instagram w3-hover-opacity"></i>
@@ -240,7 +241,6 @@
                 <i class="fa fa-linkedin w3-hover-opacity"></i>
             </div>
             <p style="margin-top: 25px;">Django Project <a href="https://academy.axsos.ps/">Axsos Academy</a>, by <a href="" class="text-white">@Coders</a>.</p>
-        </footer>
         </footer>
     </body>
 </html>
