@@ -1,6 +1,6 @@
 from django.db import models
 import re
-import datetime
+from datetime import date,datetime
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class UserManager(models.Manager):
@@ -16,12 +16,11 @@ class UserManager(models.Manager):
             errors['password'] = "Password must be at least 8 characters!"
         if postData['passwordconfirmation'] != postData['password']:
             errors['passwordconfirmation'] = "Confirmation password does not match password!"
-        # if len(post_data['birthday']) < 1:
-        #     errors['birthday'] = "Date of Birth is required!"
-        # else:
-        #     dob = datetime.strptime(post_data["birthday"], "%Y-%m-%d")
-        #     if dob > datetime.now():
-        #         errors['birthday'] = "Date of Birth must be in the past"
+        if len(postData['birthday']) < 1:
+            errors['birthday'] = "Date of Birth is required!"
+        else:
+            if datetime.strptime(postData['birthday'], "%Y-%m-%d") > datetime.today():
+                errors['birthday'] = "Date of Birth must be in the past"
         return errors
 
 class User(models.Model):
@@ -48,7 +47,7 @@ class Driver(models.Model):
     password = models.CharField(max_length=255)
     phone = models.IntegerField(null = True)
     address = models.CharField(max_length=255 , null = True)
-    car = models.CharField(max_length=255 , null = True)
+    # car = models.CharField(max_length=255 , null = True)
     birthday = models.DateField(null = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

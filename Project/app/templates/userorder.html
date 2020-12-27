@@ -19,11 +19,42 @@
         <!-- <script src="{% static 'js/script.js' %}"></script> -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <style>
+            body {
+            background-image: url('static/images/first_slide1.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            }
             .form-control {
                 display: block;
                 width: 20%;
                 padding: 40px 12px;
             }
+            .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #474e5d;
+            color: white;
+            margin-top: 20px;
+            opacity: 0.9;
+
+        }
+            th, td {
+            text-align: center;
+            padding: 16px;
+            color: black;
+            
+            }
+            th {
+                background-color: #474e5d;
+            }
+            table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            }
+
         </style>
     </head>
 
@@ -126,29 +157,42 @@
         </nav>
         <div class="w3-container w3-padding-64  w3-center" id="order">
             <div class="w3-content">
-                <h1><b>ORDER</b></h1>
-                <img class="w3-round-large w3-grayscale-min" src="static/images/first_slide1.png" style="width:100%;margin:64px 0">
-                <div class="w3-row">
-                    <div class="w3-half">
-                        <h2>My Orders</h2>
-                        <p>{% for order in myorders %}
-                            {{ order.content }}</p>
-                        <button   type="submit" class="btn btn-outline-danger btn-primary btn-lg">
-                        <a href="/remove/{{order.id}}" style = "color:black"> Delete Order </a> </button>
-                        <br><br>
-                        {% endfor %}
+                <div class="about-section" style="color: white;">
+                    <h1 style="color: white;">Orders</h1>
+                <!-- <img class="w3-round-large w3-grayscale-min" src="static/images/first_slide1.png" style="width:100%;margin:64px 0"> -->
+                <div class="w3-row" >
+                    <div class="w3-half" style="width:100%">
+                        <h2>My Orders List </h2>
+                            <table class="table table-striped">
+                                <thead>
+                                    {% for order in myorders %}
+                                    <tr>
+                                        <th>Order Number </th>
+                                        <th>Content</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color:green;">#{{order.id}}</td>
+                                        <td style="color: blue;">{{ order.content }}</td>
+                                        <td><a href="/remove/{{order.id}}" style="color: red;"> Delete Order </a></button></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                     </div>
                     <div class="w3-half">
                         <h2>Add Order!</h2>
                         <form action = '/order' method = "POST">
                             {% csrf_token %}
                             <label for = "order"> Order </label>
-                            <textarea name = 'order'  id="posted" placeholder = 'Your order here..'> </textarea><br>
-                        </div>
-                        <button style = "color:black"  type="submit" class="btn btn-outline-primary btn-primary btn-lg"> Submit </button>
-                    </form>
+                            <textarea name = 'order' style="color: black;"  id="posted" placeholder = 'Your order here..'> </textarea><br>
+                            <button style = "color:black"  type="submit" class="btn btn-outline-primary btn-primary btn-lg"> Submit </button>
+                        </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <footer class="w3-center w3-padding-40 w3-opacity w3-hover-opacity-off ">

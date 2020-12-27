@@ -106,7 +106,7 @@ def registerdriver(request):
             password = request.POST["password"]
             # car = request.POST["car"]
             password = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
-            this_user = Driver.objects.create(first_name = first_name,last_name = last_name, email = email, password = password, phone = phone , address = address , birthday = birthday , car = car)
+            this_user = Driver.objects.create(first_name = first_name,last_name = last_name, email = email, password = password, phone = phone , address = address , birthday = birthday)
             request.session['driver_id'] = this_user.id
             errors["success"] = "Successfully registered (or logged in)!"
             return redirect('/driverorder')
@@ -247,7 +247,7 @@ def removeorder(request, order_id):
     return redirect('/userorder')
 
 def addorder(request, order_id):
-    fav = Driver.objects.get(id = request.session['user_id'])
+    fav = Driver.objects.get(id = request.session['driver_id'])
     Order.objects.get(id = order_id).deliver.add(fav)
     return redirect('/driverorder')
 
@@ -257,8 +257,8 @@ def doneorder(request, order_id):
         return redirect('/')
 
     current_user = Driver.objects.get(id=request.session['driver_id'])
-    current_Order = Order.objects.get(id = order_id).deliver
-    current_Order.delete()
+    current_Order = Order.objects.get(id = order_id)
+    current_Order.deliver.remove(current_user)
 
     return redirect('/driverorder')
 

@@ -1,15 +1,11 @@
 .navbar {
   height: 70px;
-
+  margin-top: 0%;
 }
 .navbar-brand img {
   margin-top: -14%;
 }
 
-
-nav {
-  margin-top: 1%;
-}
 
 #login-dp {
   min-width: 250px;

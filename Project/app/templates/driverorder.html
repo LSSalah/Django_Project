@@ -11,14 +11,35 @@
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
         <!-- jQuery -->
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Bootstrap JS -->
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
         <link rel="shortcut icon" href="static/images/Capture.png">
         {% load static %}
         <script src="{% static 'js/script.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+        <script>
+        // function myFunction() {
+        //     var x = document.getElementById("example1");
+        //     if (x.style.display === "none") {
+        //         x.style.display = "block";
+        //     } else {
+        //         x.style.display = "none";
+        //     }
+        //     }
+            
+        // </script>
+        <style>
+            body {
+                background-image: url('static/images/driver.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                }
+            .w3-row-padding{
+                opacity: 0.9;
+            }
+        </style>
     </head>
 
     <body>
@@ -123,10 +144,10 @@
                 <ul class="w3-ul w3-light-grey w3-center">
                     <li class="w3-dark-grey w3-xlarge w3-padding-32">Orders</li>
                     {% for order in order_list %}
-                    <li class="w3-padding-16">
+                    <li class="w3-padding-16" id="form1">
                         {{ order.content }}
                         <br>Ordered by:{{order.poster.first_name}} {{order.poster.last_name}}
-                        <br><a href="/order/{{order.id}}" class="w3-button w3-white w3-padding-large w3-hover-black">Accept</a>
+                        <br><a href="/order/{{order.id}}" id="example1" class="w3-button w3-white w3-padding-large w3-hover-black">Accept</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -140,7 +161,7 @@
                         <br>Ordered by: {{order.poster.first_name}} {{order.poster.last_name}}
                         <br>{{order.poster.address}}
                         <br>{{order.poster.phone}}
-                        <br><a href="/done/{{order_id}}" class="w3-button w3-white w3-padding-large w3-hover-black"> Done </a>
+                        <br><a href="/done/{{order.id}}" class="w3-button w3-white w3-padding-large w3-hover-black"> Done </a>
                     </li>
                     {% endfor %}
                 </ul>
